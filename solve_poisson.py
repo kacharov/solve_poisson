@@ -7,13 +7,11 @@ Created on Wed Oct  4 18:25:32 2023
 """
 
 import numpy as np
-from scipy.integrate import odeint
+from scipy.integrate import odeint, quad
 
 
 # Constants
 G = 4.3009172706e-3  # Gravitational constant, pc Msun^-1 (km/s)^2
-
-# Poisson's equation, discretized
 
 
 def solve_poisson(y, r, rho_func, *rho_params):
@@ -132,3 +130,44 @@ def get_potential(r, rho_func, *rho_params):
     phi_numerical = y_numerical[1:, 0] - y_num_infty[-1, 0]
 
     return phi_numerical
+
+
+def get_mass(r, rho_func, *rho_params):
+    """
+    Calculates the cumulative mass within a given radius for a density profile.
+
+    This function uses the scipy.integrate.quad function to perform numerical
+    integration over the density profile from 0 to each radius r to calculate
+    the mass contained within that radius.
+
+    Parameters
+    ----------
+    r : array_like
+        Array of radial distances at which to compute the mass.
+
+    rho_func : callable
+        The mass density function. It must be a function
+        rho_func(r, *rho_params) that takes the radial distance and additional
+        parameters as inputs and returns the 3D mass density.
+
+    *rho_params : sequence of float
+        Additional parameters to `rho_func`.
+
+    Returns
+    -------
+    mass : numpy.ndarray
+        The mass contained within each radius in r.
+
+    Notes
+    -----
+    - This function assumes that the density profile rho_func is spherically
+    symmetric, and calculates the mass by integrating the volume density over
+    the volume of a sphere.
+    """
+
+    integral = np.zeros(len(r))
+    def func(x): return x**2 * rho_func(x, *rho_params)
+    for i in range(0, len(r)):
+        integral[i] = quad(func, 0, r[i])[0]
+
+    return 4 * np.pi * integral

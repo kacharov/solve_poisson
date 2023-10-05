@@ -58,7 +58,7 @@ def gnfw_mass(r, rho_s, r_s, gamma):
         integral = np.log(1 + r/r_s) - r/(r_s + r)
     elif gamma == 0:
         integral = -(r*(2*r_s + 3*r))/(2*(r_s + r)**2) + \
-            np.log(r_s.value + r.value) - np.log(r_s.value)
+            np.log(r_s + r) - np.log(r_s)
     else:
         print("I provide only a numerical solution for gamma != 0 and gamma !=1")
         def func(x): return x**2 * (x**(-gamma) * (1 + x)**(gamma-3))
