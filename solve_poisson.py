@@ -114,11 +114,11 @@ def get_potential(r, rho_func, *rho_params):
       division by zero.
     """
 
-    r_init = 1e-2  # pc
+    r_init = 1e-5  # pc
     r_max = 1e8  # pc
 
     # Avoid division by zero
-    if np.min(r) == 0:
+    if np.min(r) < r_init:
         r[np.argmin(r)] = r_init
 
     # ODE Initial conditions

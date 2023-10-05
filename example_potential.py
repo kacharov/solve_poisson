@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 plt.rcParams.update({'font.size': 20})
 
 # Define 3D density parameters to test a cored and a cusped gNFW profile.
-M200 = 1e11 *u.Msun # Virial mass for a gNFW profile, Msun
+M200 = 1e11 * u.Msun  # Virial mass for a gNFW profile, Msun
 cc = 10**1.5  # Concentration for a gNFW
 
 # get the gNFW scale density and radius
@@ -46,7 +46,7 @@ phi_numerical_core = get_potential(r, gnfw_density, rho_s_core, r_s_core, 0)
 plt.figure(figsize=(10, 7))
 plt.plot(r, phi_numerical_nfw, label="Numerical Solution")
 plt.plot(r, phi_analytic_nfw, '--', label="Analytic Solution")
-#plt.xscale("log")
+# plt.xscale("log")
 plt.xlabel("Radius (pc)")
 plt.ylabel("$\Phi$ (km^2 s^-2)")
 plt.title("$\Phi$ for NFW profile (analytic vs numerical)")
@@ -58,7 +58,7 @@ plt.show()
 plt.figure(figsize=(10, 7))
 plt.plot(r, phi_numerical_core, label="Numerical Solution")
 plt.plot(r, phi_analytic_core, '--', label="Analytic Solution")
-#plt.xscale("log")
+# plt.xscale("log")
 plt.xlabel("Radius (pc)")
 plt.ylabel("$\Phi$ (km^2 s^-2)")
 plt.title("$\Phi$ for Cored profile (analytic vs numerical)")
