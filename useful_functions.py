@@ -60,7 +60,7 @@ def gnfw_mass(r, rho_s, r_s, gamma):
         integral = -(r*(2*r_s + 3*r))/(2*(r_s + r)**2) + \
             np.log(r_s + r) - np.log(r_s)
     else:
-        print("I provide only a numerical solution for gamma != 0 and gamma !=1")
+        print("I provide only a numerical solution for gamma!=0 and gamma!=1")
         def func(x): return x**2 * (x**(-gamma) * (1 + x)**(gamma-3))
         integral = np.zeros(len(r))
         for i in range(0, len(r)):
@@ -119,7 +119,7 @@ def gnfw_potential(r, rho_s, r_s, gamma):
         return -4 * np.pi * G * rho_s * r_s**2 * (r_s/r * np.log(1+r/r_s) -
                                                   0.5/(1+r/r_s))
     else:
-        print("I provide only the analytical solutions for gamma != 0 and gamma !=1")
+        print("I provide only the analytical solutions for gamma==0 and gamma==1")
 
 
 def gnfw_params(M200, concentration, gamma=1, H0=70*u.km/u.s/u.Mpc):
